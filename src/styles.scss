@@ -1,0 +1,27 @@
+@import 'styles-variables';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; //import this to remove console error
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import '~@angular/material/theming';
+@include mat-core();
+@import './themes/light-theme.scss';
+@import './themes/black-theme.scss';
+.light-theme {
+  @include angular-material-theme($dv-light-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($dv-black-theme);
+}
+
+body {
+  margin: 0;
+  font-family: Roboto sans-serif;
+}
+html, body, md-sidenav-container {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+ 
