@@ -1,5 +1,4 @@
-import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import 'rxjs/add/operator/take';
 
@@ -8,7 +7,7 @@ import 'rxjs/add/operator/take';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   title = null;
   theme = 'black-theme';
   logo = require('../assets/angular-white-transparent.svg');
@@ -26,26 +25,11 @@ export class AppComponent implements OnInit, OnDestroy {
   @HostBinding('class') componentCssClass;
 
   constructor(
-    private db: AngularFireDatabase,
     public overlayContainer: OverlayContainer) {
-
-    const observable = this.db.object(`test`);
-
-    observable
-      .take(1)
-      .subscribe({
-        next: value => this.title = value.$value,
-        error: err => console.log('error' + err),
-        complete: () => console.log('done')
-      });
   }
 
   ngOnInit(): void {
     this.setTheme(this.theme);
-  }
-
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
   }
 
   setTheme(theme) {

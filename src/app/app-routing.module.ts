@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AboutComponent } from './ui/about/about.component';
+
+// import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     { path: 'about', component: AboutComponent },
-    {
-        path: '**',
-        redirectTo: ''
-    }
+    { path: '**', pathMatch: 'full', redirectTo: '/about' }
 ];
 
 @NgModule({
-    // useHash supports github.io demo page, remove in your app
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+    static components = [AboutComponent];
+}

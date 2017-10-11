@@ -1,5 +1,4 @@
 @import '../styles-variables';
-
 mat-sidenav-container {
   height: 100%;
   mat-toolbar {
@@ -7,17 +6,12 @@ mat-sidenav-container {
     .nav-button {
       margin: 0 10px 0 0;
     }
-    button {
-      &.active {
-        // color: #000;
-        // background-color: #69f0ae;
-      }
-    }
     .branding {
       display: flex;
       cursor: pointer;
       img {
         width: 50px;
+        height: 50px;
       }
     }
     .spacer {
@@ -61,7 +55,7 @@ mat-sidenav {
   z-index: -2;
   min-height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column!important;
   .content {
     flex: 1 0 auto;
     position: relative;
@@ -70,18 +64,15 @@ mat-sidenav {
     padding: 0 15px;
     text-align: center;
     z-index: 1;
-
     @media (max-width: map-get($grid-breakpoints, md)) {
       a {
         padding: 20px;
-
         span {
           width: 0;
           padding: 0;
         }
       }
     }
-
     @media (max-width: map-get($grid-breakpoints, sm)) {
       a {
         padding: 20px 5px;

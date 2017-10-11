@@ -1,11 +1,11 @@
 @import 'styles-variables';
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; //import this to remove console error
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Muli:400,700,400italic);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 @import '~@angular/material/theming';
 @include mat-core();
-@import './themes/light-theme.scss';
-@import './themes/black-theme.scss';
+@import './themes/light-theme';
+@import './themes/black-theme';
 .light-theme {
   @include angular-material-theme($dv-light-theme);
 }
@@ -16,7 +16,10 @@
 
 body {
   margin: 0;
-  font-family: Roboto sans-serif;
+  font-family: 'Muli', sans-serif;
+}
+.mat-button, .mat-raised-button, .mat-icon-button, .mat-fab, .mat-mini-fab, .mat-list-item-content {
+  font-family: 'Muli', sans-serif;
 }
 html, body, md-sidenav-container {
     margin: 0;
