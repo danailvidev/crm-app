@@ -16,7 +16,7 @@
         </button>
       <span class="branding"><img [src]="logo"/></span>
       <span routerLink="" class="branding spacer hidden-sm-down"> Brand</span>
-      <mat-slide-toggle color="accent" (change)="switchTheme($event)">
+      <mat-slide-toggle matTooltip="Change theme" matdTooltipPosition="before" (change)="switchTheme($event)">
         Theme
       </mat-slide-toggle>
       <span class="hidden-sm-down">
@@ -26,9 +26,9 @@
             </button>
         </span>
 
-      <a matTooltip="Project Github Repository" matdTooltipPosition="before" mat-icon-button class="link" href="https://github.com/danailvidev"
+      <a matTooltip="Project Github Repository" matdTooltipPosition="before" mat-icon-button class="link" href="https://github.com/danailvidev/crm-app"
         target="_blank">
-        <md-icon>home</md-icon>
+        <i class="material-icons">share</i>
       </a>
     </mat-toolbar>
 

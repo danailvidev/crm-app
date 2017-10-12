@@ -1,28 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
-
+import { Response } from '@angular/http';
+import { ICompany } from '../shared/interfaces/company';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
-import { ICompany } from '../shared/interfaces';
-import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CompanyService {
-    baseUrl = 'test';
+    companies$: FirebaseListObservable<ICompany[]>;
 
-    constructor(private http: Http) {
-
+    constructor(public db: AngularFireDatabase) {
+        this.companies$ = this.db.list(`companies`, {});
     }
 
-    getCompanies(): Observable<ICompany[]> {
-        return this.http.get(this.baseUrl)
-            .map((res: Response) => res.json())
+    getCompany(companyKey: string) {
+        return this.db.object(`/companies/${companyKey}`);
+    }
+
+    saveCompany(company: ICompany) {
+        this.companies$.push(company)
+            .then(_ => console.log('success save'))
+            .catch(this.handleError);
+    }
+    updateCompany(company: ICompany) {
+        this.companies$.update(company.$key, company)
+            .then(_ => console.log('success update'))
+            .catch(this.handleError);
+    }
+    deleteCompany(company: ICompany) {
+        this.companies$.remove(company.$key)
+            .then(_ => console.log('success delete'))
             .catch(this.handleError);
     }
 
+    getCompanies() {
+        return this.companies$;
+    }
     private handleError(error: any) {
         console.error('server error:', error);
         if (error instanceof Response) {

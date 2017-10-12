@@ -14,8 +14,7 @@ export class AppComponent implements OnInit {
   checked = false;
   navigation = [
     { link: 'about', label: 'About' },
-    { link: 'features', label: 'Features' },
-    { link: 'examples', label: 'Examples' }
+    { link: 'company-list', label: 'Companies' }
   ];
   navigationSideMenu = [
     ...this.navigation,

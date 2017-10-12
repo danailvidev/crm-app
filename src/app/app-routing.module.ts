@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './ui/about/about.component';
-
-// import { HomeComponent } from './home/home.component';
+import { CompanyEditComponent } from './ui/company/company-edit.component';
+import { CompanyListComponent } from './ui/company/company-list.component';
 
 const routes: Routes = [
     { path: 'about', component: AboutComponent },
+    { path: 'company-list', component: CompanyListComponent },
+    { path: 'company-edit/:id', component: CompanyEditComponent },
     { path: '**', pathMatch: 'full', redirectTo: '/about' }
 ];
 
@@ -15,5 +17,5 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class AppRoutingModule {
-    static components = [AboutComponent];
+    static components = [AboutComponent, CompanyEditComponent, CompanyListComponent];
 }

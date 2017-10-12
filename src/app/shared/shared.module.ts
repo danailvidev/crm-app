@@ -1,5 +1,6 @@
 
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import {
   MatButtonModule,
@@ -27,6 +28,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   imports: [
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FormsModule,
 
     MatButtonModule,
     MatToolbarModule,
@@ -48,6 +50,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   exports: [
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FormsModule,
 
     MatButtonModule,
     MatToolbarModule,

@@ -17,6 +17,10 @@ mat-sidenav-container {
     .spacer {
       flex: 1 1 auto;
     }
+    mat-slide-toggle {
+      margin: 0 20px;
+      display: flex;
+    }
     @media (max-width: map-get($grid-breakpoints, lg)) {
       .nav-button {
         min-width: 0;
