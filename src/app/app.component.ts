@@ -32,18 +32,11 @@ export class AppComponent implements OnInit {
   }
 
   setTheme(theme) {
-    this.theme = theme;
-    this.componentCssClass = theme;
+    this.theme = this.componentCssClass = theme;
     this.overlayContainer.getContainerElement().classList.add(theme);
   }
 
   switchTheme(event) {
-    if (event.checked === true) {
-      this.theme = 'light-theme';
-      this.setTheme(this.theme);
-    } else {
-      this.theme = 'black-theme';
-      this.setTheme(this.theme);
-    }
+    event.checked === true ? this.setTheme('light-theme') : this.setTheme('black-theme');
   }
 }

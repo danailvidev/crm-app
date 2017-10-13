@@ -4,6 +4,7 @@ import { FirebaseObjectObservable } from 'angularfire2/database';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ICompany } from '../../shared/interfaces/company';
+import { Location } from '@angular/common';
 import 'rxjs/add/observable/of';
 
 @Component({
@@ -17,11 +18,12 @@ export class CompanyEditComponent implements OnInit {
   company$: FirebaseObjectObservable<ICompany>;
 
   constructor(
+    private location: Location,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private companyService: CompanyService) {
 
-   }
+  }
 
   ngOnInit() {
     this.companyKey = this.activatedRoute.snapshot.params['id'];
@@ -34,10 +36,15 @@ export class CompanyEditComponent implements OnInit {
   }
 
   saveCompany(company) {
-    this.isNewCompany ? this.companyService.saveCompany(company) : this.companyService.updateCompany(company);
+    const save = this.isNewCompany
+      ? this.companyService.saveCompany(company)
+      : this.companyService.updateCompany(company);
+
+    save.then(_ => this.location.back()); // or this.router.navigate([`company-list`]);
   }
 
   deleteCompany(compny) {
-    this.companyService.deleteCompany(compny);
+    this.companyService.deleteCompany(compny)
+      .then(_ => this.location.back());
   }
 }

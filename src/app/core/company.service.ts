@@ -3,13 +3,14 @@ import { Response } from '@angular/http';
 import { ICompany } from '../shared/interfaces/company';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class CompanyService {
     companies$: FirebaseListObservable<ICompany[]>;
 
     constructor(public db: AngularFireDatabase) {
-        this.companies$ = this.db.list(`companies`, {});
+        this.companies$ = this.db.list(`companies`);
     }
 
     getCompany(companyKey: string) {
@@ -17,17 +18,19 @@ export class CompanyService {
     }
 
     saveCompany(company: ICompany) {
-        this.companies$.push(company)
+        return this.companies$.push(company)
             .then(_ => console.log('success save'))
             .catch(this.handleError);
     }
+
     updateCompany(company: ICompany) {
-        this.companies$.update(company.$key, company)
+        return this.companies$.update(company.$key, company)
             .then(_ => console.log('success update'))
             .catch(this.handleError);
     }
+
     deleteCompany(company: ICompany) {
-        this.companies$.remove(company.$key)
+        return this.companies$.remove(company.$key)
             .then(_ => console.log('success delete'))
             .catch(this.handleError);
     }
@@ -35,7 +38,9 @@ export class CompanyService {
     getCompanies() {
         return this.companies$;
     }
-    private handleError(error: any) {
+
+    private handleError(error) {
+        // error service code
         console.error('server error:', error);
         if (error instanceof Response) {
             let errMessage = '';
