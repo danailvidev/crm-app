@@ -1,0 +1,10 @@
+<h1>Contact Edit</h1>
+<mat-card *ngIf="contact$ | async as contact">
+  <mat-input-container>
+    <input type="text" matInput [(ngModel)]="contact.name">
+  </mat-input-container>
+  <mat-card-actions align="right">
+    <button mat-raised-button color="primary" (click)="saveContact(contact)">Save</button>
+    <button [disabled]="isNewContact" mat-raised-button color="warn" (click)="deleteContact(contact)">Delete</button>
+  </mat-card-actions>
+</mat-card>

@@ -2,7 +2,8 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
-import { CompanyService } from './index';
+// services
+import { CompanyService, ContactService } from './index';
 
 import { EnsureModuleLoadedOnceGuard } from '../shared/module-import-guard';
 import { environment } from '../../environments/environment';
@@ -17,7 +18,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
         AngularFireDatabaseModule,
         AngularFireAuthModule],
     providers: [
-        CompanyService
+        CompanyService,
+        ContactService
     ]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {

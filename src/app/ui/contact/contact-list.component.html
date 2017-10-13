@@ -1,0 +1,9 @@
+<h1>Contacts</h1>
+<mat-card *ngFor="let contact of contacts$ | async" fxLayoutAlign="space-between center">
+  <span>{{contact.name}}</span>
+  <button mat-button [routerLink]="['/contact-edit', contact.$key]">Edit</button>
+</mat-card>
+<button mat-fab [routerLink]="['/contact-edit/new']">
+  <mat-icon>add</mat-icon>
+</button>
+
