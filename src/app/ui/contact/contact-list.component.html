@@ -1,9 +1,18 @@
-<h1>Contacts</h1>
+<div fxLayoutAlign="space-between center">
+  <h1>Contacts</h1>
+  <mat-form-field>
+    <mat-select placeholder="Companies" (change)="contactService.subject$.next($event.value)">
+      <mat-option [value]="undefined" >All</mat-option>
+      <mat-option *ngFor="let company of companies$ | async" [value]="company.$key">{{company.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
 <mat-card *ngFor="let contact of contacts$ | async" fxLayoutAlign="space-between center">
   <span>{{contact.name}}</span>
   <button mat-button [routerLink]="['/contact-edit', contact.$key]">Edit</button>
 </mat-card>
+
 <button mat-fab [routerLink]="['/contact-edit/new']">
   <mat-icon>add</mat-icon>
 </button>
-

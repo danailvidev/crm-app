@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../../core/contact.service';
-import { FirebaseListObservable } from 'angularfire2/database';
 import { IContact } from '../../shared/interfaces/contact';
+import { CompanyService } from '../../core/company.service';
+import { ICompany } from '../../shared/interfaces/company';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'dv-contact-list',
@@ -9,16 +11,23 @@ import { IContact } from '../../shared/interfaces/contact';
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent implements OnInit {
-  contacts$: FirebaseListObservable<IContact[]>;
+  companies$: Observable<ICompany[]>;
+  contacts$: Observable<IContact[]>;
 
-  constructor(private contactService: ContactService) { }
+  constructor(
+    public contactService: ContactService,
+    private companyService: CompanyService) { }
 
   ngOnInit() {
     this.getContacts();
+    this.getCompanies();
   }
 
   getContacts() {
     this.contacts$ = this.contactService.getContacts();
   }
 
+  getCompanies() {
+    this.companies$ = this.companyService.getCompanies();
+  }
 }

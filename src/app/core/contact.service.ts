@@ -4,10 +4,12 @@ import { IContact } from '../shared/interfaces/contact';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ContactService {
     contacts$: FirebaseListObservable<IContact[]>;
+    subject$ = new BehaviorSubject<string>(undefined);
 
     constructor(public db: AngularFireDatabase) {
         this.contacts$ = this.db.list(`contacts`);
@@ -36,7 +38,12 @@ export class ContactService {
     }
 
     getContacts() {
-        return this.contacts$;
+        return this.db.list(`contacts`, {
+            query: {
+                orderByChild: 'companyKey',
+                equalTo: this.subject$
+            }
+        });
     }
 
     private handleError(error) {
