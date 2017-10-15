@@ -1,5 +1,5 @@
 <h1>Contact Edit</h1>
-<mat-card *ngIf="contact$ | async as contact">
+<mat-card>
 
   <mat-input-container>
     <input type="text" matInput [(ngModel)]="contact.name">
@@ -7,12 +7,15 @@
 
   <div *ngIf="!isNewContact">
     <mat-form-field>
-      <mat-select placeholder="Company" [(ngModel)]="contact.companyKey">
-        <mat-option *ngFor="let company of companies$ | async" [value]="company.$key">{{company.name}}</mat-option>
+      <mat-select placeholder="Company" [(ngModel)]="selectedCompany">
+        <mat-option *ngFor="let company of companies$ | async" [value]="company">{{company.name}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <button mat-raised-button (click)="addCompany()">Add Company</button>
   </div>
-
+<mat-list>
+<mat-list-item *ngFor="let company of contactCompanies">{{company.name}}</mat-list-item>
+</mat-list>
   <mat-card-actions align="right">
     <button mat-raised-button color="primary" (click)="saveContact(contact)">Save</button>
     <button [disabled]="isNewContact" mat-raised-button color="warn" (click)="deleteContact(contact)">Delete</button>

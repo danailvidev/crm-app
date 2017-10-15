@@ -18,7 +18,9 @@ export class ContactEditComponent implements OnInit {
   companies$: Observable<ICompany[]>;
   isNewContact: boolean;
   contactKey: string;
-  contact$: Observable<IContact>;
+  contact = {name: ''} as IContact;
+  selectedCompany: IContact;
+  contactCompanies = [];
 
   constructor(
     private location: Location,
@@ -32,12 +34,23 @@ export class ContactEditComponent implements OnInit {
   ngOnInit() {
     this.contactKey = this.activatedRoute.snapshot.params['id'];
     this.isNewContact = this.contactKey === 'new';
-    this.isNewContact ? this.contact$ = Observable.of({}) as FirebaseObjectObservable<IContact> : this.getContact(this.contactKey);
+    if (!this.isNewContact) {
+      this.getContact(this.contactKey);
+    }
     this.companies$ = this.companyService.getCompanies();
   }
 
   getContact(key) {
-    this.contact$ = this.contactService.getContact(key);
+    this.contactService.getContact(key)
+      .subscribe((contact) => {
+        this.contact = contact;
+        this.setContactCompanies();
+      });
+  }
+
+  setContactCompanies() {
+    if (this.contact.contactCompanies == null) { this.contact.contactCompanies = {}; }
+    this.contactCompanies = Object.keys(this.contact.contactCompanies).map(key => this.contact.contactCompanies[key]);
   }
 
   saveContact(contact) {
@@ -51,5 +64,10 @@ export class ContactEditComponent implements OnInit {
   deleteContact(compny) {
     this.contactService.deleteContact(compny)
       .then(_ => this.location.back());
+  }
+
+  addCompany() {
+    this.contact.contactCompanies[this.selectedCompany.$key] = { name: this.selectedCompany.name };
+    this.setContactCompanies();
   }
 }
