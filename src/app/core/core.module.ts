@@ -4,12 +4,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 // services
 import { CompanyService, ContactService } from './index';
+import { AuthService } from '../auth/auth.service';
 
 import { EnsureModuleLoadedOnceGuard } from '../shared/module-import-guard';
 import { environment } from '../../environments/environment';
+
+// firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
 
 @NgModule({
     imports: [HttpModule,
@@ -19,7 +23,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
         AngularFireAuthModule],
     providers: [
         CompanyService,
-        ContactService
+        ContactService,
+        AuthService
     ]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {

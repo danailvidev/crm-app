@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import 'rxjs/add/operator/take';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
   @HostBinding('class') componentCssClass;
 
   constructor(
+    public authService: AuthService,
     public overlayContainer: OverlayContainer) {
   }
 

@@ -1,10 +1,19 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="push">
-    <div class="branding"><span>Angular Starter</span></div>
+    <div class="branding">
+      <span>Angular Starter</span>
+    </div>
     <mat-nav-list>
       <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()" [routerLink]="[item.link]" routerLinkActive="active">
-              {{item.label}}
-            </a>
+        {{item.label}}
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item *ngIf="!(authService.user$ | async)?.uid" (click)="authService.login();sidenav.close()">
+        Login
+      </a>
+      <a mat-list-item *ngIf="(authService.user$ | async)?.uid" (click)="authService.logout();sidenav.close()">
+        Logout
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -12,19 +21,30 @@
 
     <mat-toolbar color="primary">
       <button mat-icon-button class="hidden-md-up" (click)="sidenav.open()">
-            <mat-icon>menu</mat-icon>
-        </button>
-      <span class="branding"><img [src]="logo"/></span>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="branding">
+        <img [src]="logo" />
+      </span>
       <span routerLink="" class="branding spacer hidden-sm-down"> Brand</span>
       <mat-slide-toggle matTooltip="Change theme" matdTooltipPosition="before" (change)="switchTheme($event)">
         Theme
       </mat-slide-toggle>
+
       <span class="hidden-sm-down">
-            <button mat-button class="nav-button" *ngFor="let item of navigation"
-                [routerLink]="[item.link]" routerLinkActive="active">
-                {{item.label}}
-            </button>
-        </span>
+        <div *ngIf="(authService.user$ | async)?.uid">
+          <button mat-button class="nav-button" *ngFor="let item of navigation" [routerLink]="[item.link]" routerLinkActive="active">
+            {{item.label}}
+          </button>
+          <button mat-icon-button (click)="authService.logout()" matTooltip="Logout" matdTooltipPosition="before">
+            <mat-icon>power_settings_new</mat-icon>
+          </button>
+        </div>
+
+        <button *ngIf="!(authService.user$ | async)?.uid" mat-button (click)="authService.login()" matTooltip="Login" matdTooltipPosition="before">
+          Login
+        </button>
+      </span>
 
       <a matTooltip="Project Github Repository" matdTooltipPosition="before" mat-icon-button class="link" href="https://github.com/danailvidev/crm-app"
         target="_blank">
