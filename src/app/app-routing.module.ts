@@ -6,13 +6,14 @@ import { CompanyEditComponent } from './ui/company/company-edit.component';
 import { CompanyListComponent } from './ui/company/company-list.component';
 import { ContactListComponent } from './ui/contact/contact-list.component';
 import { ContactEditComponent } from './ui/contact/contact-edit.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
     { path: 'about', component: AboutComponent },
-    { path: 'company-list', component: CompanyListComponent },
-    { path: 'company-edit/:id', component: CompanyEditComponent },
-    { path: 'contact-list', component: ContactListComponent },
-    { path: 'contact-edit/:id', component: ContactEditComponent },
+    { path: 'company-list', component: CompanyListComponent, canActivate: [AuthGuard] },
+    { path: 'company-edit/:id', component: CompanyEditComponent, canActivate: [AuthGuard] },
+    { path: 'contact-list', component: ContactListComponent, canActivate: [AuthGuard] },
+    { path: 'contact-edit/:id', component: ContactEditComponent, canActivate: [AuthGuard] },
     { path: '**', pathMatch: 'full', redirectTo: '/about' }
 ];
 
