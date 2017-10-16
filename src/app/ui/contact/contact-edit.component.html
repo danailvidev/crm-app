@@ -1,6 +1,11 @@
 <h1>Contact Edit</h1>
 <mat-card>
 
+  <div>
+    <img *ngIf="contact.imageUrl" [src]="contact.imageUrl" alt="contact image url">
+    <input type="file" *ngIf="!isNewContact" (change)="uploadFile($event)">
+  </div>
+
   <mat-input-container>
     <input type="text" matInput [(ngModel)]="contact.name">
   </mat-input-container>
@@ -13,9 +18,9 @@
     </mat-form-field>
     <button mat-raised-button (click)="addCompany()">Add Company</button>
   </div>
-<mat-list>
-<mat-list-item *ngFor="let company of contactCompanies">{{company.name}}</mat-list-item>
-</mat-list>
+  <mat-list>
+    <mat-list-item *ngFor="let company of contactCompanies">{{company.name}}</mat-list-item>
+  </mat-list>
   <mat-card-actions align="right">
     <button mat-raised-button color="primary" (click)="saveContact(contact)">Save</button>
     <button [disabled]="isNewContact" mat-raised-button color="warn" (click)="deleteContact(contact)">Delete</button>

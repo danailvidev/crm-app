@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import 'rxjs/add/observable/of';
 import { CompanyService } from '../../core/company.service';
 import { ICompany } from '../../shared/interfaces/company';
+import * as firebase from 'firebase/app'; // typings only
 
 @Component({
   selector: 'dv-contact-edit',
@@ -69,5 +70,12 @@ export class ContactEditComponent implements OnInit {
   addCompany() {
     this.contact.contactCompanies[this.selectedCompany.$key] = { name: this.selectedCompany.name };
     this.setContactCompanies();
+  }
+
+  uploadFile(event: any) {
+    const file = event.srcElement.files[0];
+    const storageRef = firebase.storage().ref(`contacts/${this.contactKey}`);
+    storageRef.put(file)
+    .then(uploadTask => this.contact.imageUrl = uploadTask.downloadURL);
   }
 }

@@ -21,6 +21,7 @@ import {
 } from '@angular/material';
 
 import 'hammerjs';
+import 'firebase/storage'; // global firebase storage js
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
