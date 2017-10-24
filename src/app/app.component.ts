@@ -2,6 +2,7 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import 'rxjs/add/operator/take';
 import { AuthService } from './auth/auth.service';
+import { LoggingService } from './core/logging.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    public overlayContainer: OverlayContainer) {
+    public overlayContainer: OverlayContainer,
+    private logger: LoggingService) {
   }
 
   ngOnInit(): void {
@@ -41,5 +43,9 @@ export class AppComponent implements OnInit {
 
   switchTheme(event) {
     event.checked === true ? this.setTheme('light-theme') : this.setTheme('black-theme');
+  }
+
+  testlog() {
+    this.logger.log('msg');
   }
 }

@@ -6,7 +6,7 @@ const packageJson = require('../../package.json');
 
 export const environment = {
   production: false,
-  firebase : {
+  firebase: {
     apiKey: 'AIzaSyBe2dRVEiMbg2l1H3NHgMgvBEd6LJCkXJs',
     authDomain: 'ngcrm-95d41.firebaseapp.com',
     databaseURL: 'https://ngcrm-95d41.firebaseio.com',
@@ -20,5 +20,20 @@ export const environment = {
     material: packageJson.dependencies['@angular/material'],
     angularCli: packageJson.devDependencies['@angular/cli'],
     typescript: packageJson.devDependencies['typescript']
-  }
+  },
+  logging: [
+    {
+      loggerName: 'console',
+      loggerLocation: '',
+      isActive: true
+    }, {
+      loggerName: 'localStorage',
+      loggerLocation: 'logger',
+      isActive: false
+    }, {
+      loggerName: 'webApiFire',
+      loggerLocation: 'logs',
+      isActive: false
+    }
+  ]
 };

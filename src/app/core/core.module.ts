@@ -3,7 +3,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 // services
-import { CompanyService, ContactService } from './index';
+import { CompanyService, ContactService, LoggingService, LogPublisherService } from './index';
 import { AuthService } from '../auth/auth.service';
 
 import { EnsureModuleLoadedOnceGuard } from '../shared/module-import-guard';
@@ -26,7 +26,9 @@ import { AuthGuard } from '../auth/auth.guard';
         CompanyService,
         ContactService,
         AuthService,
-        AuthGuard
+        AuthGuard,
+        LoggingService,
+        LogPublisherService
     ]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {

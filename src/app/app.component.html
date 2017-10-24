@@ -26,7 +26,7 @@
       <button mat-icon-button class="hidden-md-up" (click)="sidenav.open()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="branding">
+      <span class="branding" (click)="testlog()">
         <img [src]="logo" />
       </span>
       <span routerLink="" class="branding spacer hidden-sm-down"> Brand</span>
