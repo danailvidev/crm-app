@@ -3,6 +3,9 @@
   <span>{{company.name}}</span>
   <button mat-button [routerLink]="['/company-edit', company.$key]">Edit</button>
 </mat-card>
+
+<dv-loading-spinner [loading]="!(companies$ | async)"></dv-loading-spinner>
+
 <button mat-fab [routerLink]="['/company-edit/new']">
   <mat-icon>add</mat-icon>
 </button>

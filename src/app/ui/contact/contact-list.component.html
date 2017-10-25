@@ -13,6 +13,8 @@
   <button mat-button [routerLink]="['/contact-edit', contact.$key]">Edit</button>
 </mat-card>
 
+<dv-loading-spinner [loading]="!(contacts$ | async)"></dv-loading-spinner>
+
 <button mat-fab [routerLink]="['/contact-edit/new']">
   <mat-icon>add</mat-icon>
 </button>

@@ -6,6 +6,8 @@ import { CompanyEditComponent } from './ui/company/company-edit.component';
 import { CompanyListComponent } from './ui/company/company-list.component';
 import { ContactListComponent } from './ui/contact/contact-list.component';
 import { ContactEditComponent } from './ui/contact/contact-edit.component';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
+
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
@@ -27,6 +29,7 @@ export class AppRoutingModule {
         CompanyEditComponent,
         CompanyListComponent,
         ContactListComponent,
-        ContactEditComponent
+        ContactEditComponent,
+        LoadingSpinnerComponent
     ];
 }
