@@ -25,6 +25,9 @@ import 'firebase/storage'; // global firebase storage js
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+// components
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -47,12 +50,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTooltipModule,
     MatSlideToggleModule
   ],
-  declarations: [],
+  declarations: [
+    LoadingSpinnerComponent
+  ],
   exports: [
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
 
+    // components
+    LoadingSpinnerComponent,
+
+    // material
     MatButtonModule,
     MatToolbarModule,
     MatSelectModule,

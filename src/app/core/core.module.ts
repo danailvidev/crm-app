@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CompanyService, ContactService, LoggingService, LogPublisherService } from './index';
 import { AuthService } from '../auth/auth.service';
 
+// system
 import { EnsureModuleLoadedOnceGuard } from '../shared/module-import-guard';
 import { environment } from '../../environments/environment';
 
@@ -17,7 +18,8 @@ import { AuthGuard } from '../auth/auth.guard';
 
 
 @NgModule({
-    imports: [HttpModule,
+    imports: [
+        HttpModule,
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
