@@ -6,6 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import { ICompany } from '../../shared/interfaces/company';
 import { Location } from '@angular/common';
 import 'rxjs/add/observable/of';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../shared/interfaces/app-state';
+import * as companyActions from './../../actions/company.actions';
 
 @Component({
   selector: 'dv-company-edit',
@@ -21,7 +24,8 @@ export class CompanyEditComponent implements OnInit {
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private companyService: CompanyService) {
+    private companyService: CompanyService,
+    private store: Store<AppState>) {
 
   }
 
@@ -43,8 +47,9 @@ export class CompanyEditComponent implements OnInit {
     save.then(_ => this.location.back()); // or this.router.navigate([`company-list`]);
   }
 
-  deleteCompany(compny) {
-    this.companyService.deleteCompany(compny)
-      .then(_ => this.location.back());
+  deleteCompany(company) {
+    this.store.dispatch(new companyActions.DeleteCompanyAction(company));
+    // this.companyService.deleteCompany(compny)
+    //   .then(_ => this.location.back());
   }
 }

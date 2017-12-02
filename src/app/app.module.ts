@@ -6,6 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
+// ngrx
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { companyReducer } from './reducers/company.reducer';
+import { CompanyEffects } from './effects/company.effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +22,12 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+
+    // ngrx
+    StoreModule.forRoot({companies: companyReducer}),
+    EffectsModule.forRoot([CompanyEffects]),
+    StoreDevtoolsModule.instrument()
   ],
   bootstrap: [AppComponent]
 })
