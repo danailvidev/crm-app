@@ -1,6 +1,5 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import 'rxjs/add/operator/take';
 import { AuthService } from './auth/auth.service';
 import { LoggingService } from './core/logging.service';
 
